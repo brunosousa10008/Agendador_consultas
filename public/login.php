@@ -7,10 +7,10 @@
 </head>
 <body>
     <div class="head">
-
+        <h1>Clínica MedPrime</h1>
     </div>
     <div class="body">
-
+        
     </div>
 </body>
 </html>
