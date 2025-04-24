@@ -1,0 +1,81 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+main {
+    height: 100dvh;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    & .login-submit {
+        margin: 2rem;
+        width: 500px;
+        padding: 1rem;
+        background-color: white;
+
+        & .head {
+            & .title {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.3rem;
+
+                & h1 {
+                    text-align: center;
+                    font-size: 26px;
+                    font-weight: 500;
+                
+                    font-weight: bold;
+                    font-family: "Montserrat", sans-serif;
+
+    
+                   & span:nth-child(1) {
+                        color: #dc3545;
+                    } 
+                   
+                   & span:nth-child(2) {
+                        color: #1B5E20;
+                    } 
+                }
+            }
+            
+        }
+
+        & .content {
+            margin-top: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            & div {
+                display: flex;
+                flex-direction: column;
+                gap: 0.3rem;
+                margin-bottom: 1.5rem;
+
+                & label {
+                    font-family: "Montserrat", sans-serif;
+                }
+
+                & input {
+                    height: 35px;
+
+                }
+
+                & button {
+                    margin-top: 2rem;
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: background-color 0.3s, transform 0.2s;
+                    background-color: #dc3545;
+                    color: white;
+                }
+            }
+        }
+    }
+    
+}

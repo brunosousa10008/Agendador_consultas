@@ -1,15 +1,33 @@
 CREATE DATABASE  medprime;
 
+CREATE TABLE medprime.tbPerfil (
+	perfil_id INT NOT NULL AUTO_INCREMENT,
+    descricao VARCHAR (200) NOT NULL UNIQUE,
+    
+    PRIMARY KEY(perfil_id)
+    
+);
+
+INSERT INTO medprime.tbPerfil (descricao) VALUES 
+('admin'),
+('médico'),
+('paciente');
+
 CREATE TABLE medprime.tbUsuarios(
 	usuario_id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(200) NOT NULL,
+    perfil_id INT NOT NULL,
+    cpf VARCHAR(14) NOT NULL UNIQUE,
+    nascimento DATE NOT NULL,
     login VARCHAR(50) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
     senha VARCHAR(255) NOT NULL,
-    atualizado_em timestamp NOT NULL,
-    atualizado_por INT,
+    atualizado_em TIMESTAMP NOT NULL,
+    atualizado_por INT DEFAULT NULL,
     
     PRIMARY KEY(usuario_id),
-	FOREIGN KEY (atualizado_por) REFERENCES medprime.tbUsuarios(usuario_id)
+    FOREIGN KEY (perfil_id) REFERENCES medprime.tbPerfil(perfil_id),
+    FOREIGN KEY (atualizado_por) REFERENCES medprime.tbUsuarios(usuario_id)
 );
 
 CREATE TABLE medprime.tbConsultaTipo (
@@ -19,30 +37,24 @@ CREATE TABLE medprime.tbConsultaTipo (
     PRIMARY KEY(consulta_tipo_id)
 );
 
-CREATE TABLE medprime.tbPessoaTipo (
-	pessoa_tipo_id INT NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR (200) NOT NULL UNIQUE,
-    
-    PRIMARY KEY(pessoa_tipo_id)
-    
-);
+INSERT INTO medprime.tbConsultaTipo (descricao) VALUES
+('Ortopedia'),
+('Oftalmologia'),
+('Urologia'),
+('Neurologia'),
+('Endocrinologia'),
+('Reumatologia'),
+('Nutrição'),
+('Fisioterapia'),
+('Otorrinolaringologia'),
+('Infectologia'),
+('Clínico Geral Domiciliar'),
+('Pré-Natal'),
+('Avaliação Cirúrgica'),
+('Acompanhamento de Medicação'),
+('Emissão de Atestado Médico');
 
-CREATE TABLE medprime.tbPessoas(
-	pessoa_id INT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(200) NOT NULL,
-    cpf VARCHAR(14) NOT NULL UNIQUE,
-    nascimento DATE NOT NULL,
-    telefone VARCHAR(20) NOT NULL,
-    pessoa_tipo_id INT NOT NULL,
-    atualizado_por INT NOT NULL,
-    atualizado_em DATE NOT NULL,
-    
-    PRIMARY KEY(pessoa_id),
-	FOREIGN KEY (pessoa_tipo_id) REFERENCES medprime.tbPessoaTipo(pessoa_tipo_id),
-	FOREIGN KEY (atualizado_por) REFERENCES medprime.tbUsuarios(usuario_id)
-);
-
-CREATE TABLE medprime.tbConsulta(
+CREATE TABLE medprime.tbConsulta (
 	consulta_id INT NOT NULL UNIQUE AUTO_INCREMENT,
     paciente_id INT,
     datahora TIMESTAMP NOT NULL UNIQUE,
@@ -53,8 +65,10 @@ CREATE TABLE medprime.tbConsulta(
     atualizado_em TIMESTAMP NOT NULL,
     
     PRIMARY KEY(consulta_id),
-    FOREIGN KEY (paciente_id) REFERENCES medprime.tbPessoas(pessoa_id),
+    FOREIGN KEY (paciente_id) REFERENCES medprime.tbUsuarios(usuario_id),
 	FOREIGN KEY (consulta_tipo_id) REFERENCES medprime.tbConsultaTipo(consulta_tipo_id),
-    FOREIGN KEY (medico_id) REFERENCES medprime.tbPessoas(pessoa_id)
+    FOREIGN KEY (medico_id) REFERENCES medprime.tbUsuarios(usuario_id)
 );
+
+
 
