@@ -1,12 +1,39 @@
 <?php
 require_once __DIR__ . "/../database/Pdo.php";
-
+session_start();
 class Usuario {
     private $pdo;
 
     public function __construct() {
         $db = new Pdo();
         $this->pdo = $db->getPDO();
+    }
+
+    function loginUsuario(string $login, $senha ){
+        try {
+            $sql = "SELECT * FROM users 
+                    WHERE login = :login 
+                    AND login_origin = 'local'
+                    AND active = 1";
+
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':login' => $login]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $ip = $_SERVER['REMOTE_ADDR'] ?? 'IP desconhecido';
+
+            if ($user && password_verify($senha, $user['senha'])) {
+                $_SESSION['authentication'] = $user['id'];
+                return true;
+
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("Erro na conexão ou execução da consulta: " . $e->getMessage());
+            return false;
+
+        }
     }
 
     function criarUsuario(string $nome, int $perfil_id, string $cpf, string $nascimento, string $login, string $telefone, string $senha, int $atualizado_por) {

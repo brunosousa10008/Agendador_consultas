@@ -5,7 +5,6 @@ CREATE TABLE medprime.tbPerfil (
     descricao VARCHAR (200) NOT NULL UNIQUE,
     
     PRIMARY KEY(perfil_id)
-    
 );
 
 INSERT INTO medprime.tbPerfil (descricao) VALUES 
@@ -17,18 +16,24 @@ CREATE TABLE medprime.tbUsuarios(
 	usuario_id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(200) NOT NULL,
     perfil_id INT NOT NULL,
-    cpf VARCHAR(14) NOT NULL UNIQUE,
-    nascimento DATE NOT NULL,
+    cpf VARCHAR(14) UNIQUE,
+    nascimento DATE,
     login VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(255),
     telefone VARCHAR(20),
+	ativo TINYINT(1) NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    atualizado_em TIMESTAMP NOT NULL,
+    atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     atualizado_por INT DEFAULT NULL,
     
     PRIMARY KEY(usuario_id),
     FOREIGN KEY (perfil_id) REFERENCES medprime.tbPerfil(perfil_id),
     FOREIGN KEY (atualizado_por) REFERENCES medprime.tbUsuarios(usuario_id)
 );
+
+INSERT INTO medprime.tbUsuarios(nome, perfil_id, login, cpf, nascimento, email, telefone, ativo, senha, atualizado_em, atualizado_por) 
+VALUES 
+('Administrator', 1, 'admin', NULL, NULL, NULL, NULL, 1, '$2y$10$41I.w1YkgV6hNraRJc1MQuPxhSE5L9kXeqB2DY5nnRtkr/BITJ7.O', CURRENT_TIMESTAMP, NULL);
 
 CREATE TABLE medprime.tbConsultaTipo (
 	consulta_tipo_id INT NOT NULL AUTO_INCREMENT,
