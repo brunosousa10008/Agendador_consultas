@@ -1,111 +1,115 @@
 @import url(reset.css);
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-main {
-    height: 100dvh;
-    margin-top: 4rem;
-    display: flex;
-    justify-content: center;
-
-
-    & .login-submit {
-        width: 500px;
-        height: 400px;
-        padding: 2rem;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+body {
+    background-color: #D3D3D3;
+    
+    main {
+        height: 100dvh;
+        margin-top: 4rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: transform 0.3s ease-in-out;
-        transform: scale(1);
-
-        &:hover {
-            transform: scale(1.03);
-        }
-
-        & .head {
-            & .title {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.3rem;
-                margin-bottom: 1.5rem;
-
-                & h1 {
-                    font-size: 28px;
-                    font-weight: bold;
-                    font-family: "Montserrat", sans-serif;
-                    text-align: center;
-                    color: #333;
-
-                    & span:nth-child(1) {
-                        color: #dc3545;
-                    }
-
-                    & span:nth-child(2) {
-                        color: #1B5E20;
+        justify-content: center;
+    
+        & .login-submit {
+            width: 500px;
+            height: 400px;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+            transform: scale(1);
+    
+            &:hover {
+                transform: scale(1.03);
+            }
+    
+            & .head {
+                & .title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.3rem;
+                    margin-bottom: 1.5rem;
+    
+                    & h1 {
+                        font-size: 28px;
+                        font-weight: bold;
+                        font-family: "Montserrat", sans-serif;
+                        text-align: center;
+                        color: #333;
+    
+                        & span:nth-child(1) {
+                            color: #dc3545;
+                        }
+    
+                        & span:nth-child(2) {
+                            color: #1B5E20;
+                        }
                     }
                 }
             }
-        }
-
-        & .content {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-
-            & div {
+    
+            & .content {
                 display: flex;
                 flex-direction: column;
-                gap: 1rem;
-                margin-bottom: 2rem;
-
-                & label {
-                    font-family: "Montserrat", sans-serif;
-                    font-size: 16px;
-                    color: #555;
-                }
-
-                & input {
-                    height: 40px;
-                    padding: 0 1rem;
-                    font-size: 16px;
-                    border: 1px solid #ccc;
-                    border-radius: 8px;
-                    background-color: #f9f9f9;
-                    transition: border-color 0.3s, background-color 0.3s;
-
-                    &:focus {
-                        border-color: #1B5E20;
-                        background-color: #e9f9e9;
-                        outline: none;
+                width: 100%;
+    
+                & div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+    
+                    & label {
+                        font-family: "Montserrat", sans-serif;
+                        font-size: 16px;
+                        color: #555;
                     }
-                }
-
-                & button {
-                    font-size: 18px;
-                    font-weight: bold;
-                    padding: 12px 20px;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    transition: background-color 0.3s, transform 0.2s;
-                    background-color: #dc3545;
-                    color: white;
-                    margin-top: 1.5rem;
-
-                    &:hover {
-                        background-color: #c82333;
-                        transform: translateY(-2px);
+    
+                    & input {
+                        height: 40px;
+                        padding: 0 1rem;
+                        font-size: 16px;
+                        border: 1px solid #ccc;
+                        border-radius: 8px;
+                        background-color: #f9f9f9;
+                        transition: border-color 0.3s, background-color 0.3s;
+    
+                        &:focus {
+                            border-color: #1B5E20;
+                            background-color: #e9f9e9;
+                            outline: none;
+                        }
                     }
-
-                    &:active {
-                        transform: translateY(1px);
+    
+                    & button {
+                        font-size: 18px;
+                        font-weight: bold;
+                        padding: 12px 20px;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        transition: background-color 0.3s, transform 0.2s;
+                        background-color: #dc3545;
+                        color: white;
+                        margin-top: 1.5rem;
+    
+                        &:hover {
+                            background-color: #c82333;
+                            transform: translateY(-2px);
+                        }
+    
+                        &:active {
+                            transform: translateY(1px);
+                        }
                     }
                 }
             }
         }
     }
 }
+

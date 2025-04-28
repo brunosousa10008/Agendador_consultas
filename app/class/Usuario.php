@@ -1,29 +1,26 @@
 <?php
-require_once __DIR__ . "/../database/Pdo.php";
+require_once __DIR__ . "/../database/ConexaoDB.php";
 session_start();
 class Usuario {
     private $pdo;
 
     public function __construct() {
-        $db = new Pdo();
+        $db = new ConexaoDB();
         $this->pdo = $db->getPDO();
     }
 
-    function loginUsuario(string $login, $senha ){
+    function loginUsuario(string $login, $senha){
         try {
-            $sql = "SELECT * FROM users 
+            $sql = "SELECT * FROM tbUsuarios
                     WHERE login = :login 
-                    AND login_origin = 'local'
-                    AND active = 1";
+                    AND ativo = 1";
 
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([':login' => $login]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $ip = $_SERVER['REMOTE_ADDR'] ?? 'IP desconhecido';
-
             if ($user && password_verify($senha, $user['senha'])) {
-                $_SESSION['authentication'] = $user['id'];
+                $_SESSION['autenticacao'] = $user['usuario_id'];
                 return true;
 
             } else {

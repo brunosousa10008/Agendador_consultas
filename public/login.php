@@ -16,17 +16,19 @@
                 </div>
             </div>
             <div class="body">
-                <div>
-                    <label for="user">Login</label>
-                    <input type="text" name="user">
-                </div>
-                <div>
-                    <label for="pass">Senha</label>
-                    <input type="password" name="pass">
-                </div>
-                <div>
-                    <button>Entrar</button>
-                </div>
+                <form action="./forms/validacaoDeLogin.php" method="post">
+                    <div>
+                        <label for="user">Login</label>
+                        <input type="text" name="user">
+                    </div>
+                    <div>
+                        <label for="pass">Senha</label>
+                        <input type="password" name="pass">
+                    </div>
+                    <div>
+                        <button>Entrar</button>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="login-wallpaper">

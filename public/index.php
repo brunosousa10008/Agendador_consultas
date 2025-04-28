@@ -1,3 +1,7 @@
+<?php
+    include_once __DIR__ . '/../app/class/Usuario.php';
+    if(isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -46,3 +50,8 @@
     </footer>
 </body>
 </html>
+<?php
+else : 
+    header('Location: ./login.php');  
+endif;
+?>

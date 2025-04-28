@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . "/../database/Pdo.php";
-
-class Pdo{
+class ConexaoDB {
     private $host;
     private $db;
     private $user;
