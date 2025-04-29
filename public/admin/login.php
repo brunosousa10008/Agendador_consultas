@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=], initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/login-admin.css">
+    <script src="../assets/js/login.js" defer></script>
     <title>MedPrime - Login</title>
 </head>
 <body>
     <main>
+        <!-- Start message -->
+        <?php include __DIR__ . '/../includes/message.php'; ?>
+        <!-- End message -->
         <div class="login-submit">
             <div class="head">
                 <div class="title">
@@ -16,17 +20,17 @@
                 </div>
             </div>
             <div class="content">
-                <form action="../forms/validacaoDeLogin.php" method="post">
+                <form action="" method="post" id="loginFormAdmin">
                     <div>
                         <label for="user">Login</label>
-                        <input type="text" name="user">
+                        <input type="text" name="user" required>
                     </div>
                     <div>
                         <label for="pass">Senha</label>
-                        <input type="password" name="pass">
+                        <input type="password" name="pass" required>
                     </div>
                     <div>
-                        <button>Entrar</button>
+                        <button id="submitLoginFormAdmin">Entrar</button>
                     </div>
                 </form>
             </div>

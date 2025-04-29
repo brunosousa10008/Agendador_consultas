@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($usuario->loginUsuario($nome, $senha)) {
         echo json_encode(["success" => "Login efetuado com sucesso!"]);
-        echo $_SESSION['autenticacao'];
     
     } else {
         echo json_encode(["error" => "Login inválido!"]);
