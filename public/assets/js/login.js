@@ -49,7 +49,7 @@ if(loginFormAdmin){
                     } else {
                         showMessage("messageSuccess", response.success);
                         setTimeout(() => {
-                            window.location.href = "administracao/gerenciamento.php";
+                            window.location.href = "gerenciamento.php";
                         }, 700);
                     }
                 } else {

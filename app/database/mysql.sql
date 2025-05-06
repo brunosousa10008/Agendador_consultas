@@ -21,7 +21,7 @@ CREATE TABLE medprime.tbUsuarios(
     login VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(255),
     telefone VARCHAR(20),
-	ativo TINYINT(1) NOT NULL,
+	ativo TINYINT NOT NULL,
     senha VARCHAR(255) NOT NULL,
     atualizado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     atualizado_por INT DEFAULT NULL,
