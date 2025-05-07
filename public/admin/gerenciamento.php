@@ -68,29 +68,38 @@ if (isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
                         <div class="fields">
                             <div class="division-1">
                                 <div class="user-name">
-                                    <label for="name">Name <span>&ast;</span></label>
+                                    <label for="name">Nome <span>&ast;</span></label>
                                     <input type="text" name="name" required>
                                 </div>
                                 <div class="user-email">
                                     <label for="email">Email</label>
                                     <input type="text" name="email">
                                 </div>
+                                <div class="user-cpf">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" name="cpf" required pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" maxlength="14" title="Digite um CPF válido (ex: 123.456.789-09)">
+                                </div>
+                                <div class="user-data-nascimento">
+                                    <label for="dtnascimento">Data de Nascimento</label>
+                                    <input type="date" name="dtnascimento" required>
+                                </div>
                                 <div class="user-profile">
                                     <label for="profile">Profile <span>&ast;</span></label>
                                     <select name="profile" required>
                                         <option value="1">Admin</option>
-                                        <option value="2">Analyst</option>
-                                    </select>
-                                </div>
-                                <div class="user-origin_authentication">
-                                    <label for="origin_authentication">Origin authentication <span>&ast;</span></label>
-                                    <select name="origin_authentication" id="selectOriginAuth" required>
-                                        <option value="local">local</option>
-                                        <option value="ldap">ldap</option>
+                                        <option value="2">Médico</option>
+                                        <option value="3">Paciente</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="division-2">
+                                <div class="user-phone">
+                                    <label for="phone">Telefone</label>
+                                    <input type="text" name="phone" id="phone" required
+                                        pattern="\(\d{2}\)\s?\d{4,5}-\d{4}"
+                                        maxlength="15"
+                                        title="Digite um telefone válido (ex: (11) 91234-5678)">
+                                </div>
                                 <div class="user-login">
                                     <label for="login">Login <span>&ast;</span></label>
                                     <input type="text" name="login" required>
@@ -137,44 +146,53 @@ if (isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
                         <div class="fields">
                             <div class="division-1">
                                 <div class="user-name">
-                                    <label for="name">Name <span>&ast;</span></label>
-                                    <input type="text" name="name" id="editName" required>
+                                    <label for="name">Nome <span>&ast;</span></label>
+                                    <input type="text" name="name" required>
                                 </div>
                                 <div class="user-email">
                                     <label for="email">Email</label>
-                                    <input type="text" id="editEmail" name="email">
+                                    <input type="text" name="email">
+                                </div>
+                                <div class="user-cpf">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" name="cpf" required pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" maxlength="14" title="Digite um CPF válido (ex: 123.456.789-09)">
+                                </div>
+                                <div class="user-data-nascimento">
+                                    <label for="dtnascimento">Data de Nascimento</label>
+                                    <input type="date" name="dtnascimento" required>
                                 </div>
                                 <div class="user-profile">
                                     <label for="profile">Profile <span>&ast;</span></label>
-                                    <select name="profile" id="editProfile" required>
+                                    <select name="profile" required>
                                         <option value="1">Admin</option>
-                                        <option value="2" id="optionsProfileAnalyst">Analyst</option>
-                                    </select>
-                                </div>
-                                <div class="user-origin_authentication">
-                                    <label for="origin_authentication">Origin authentication <span>&ast;</span></label>
-                                    <select name="origin_authentication" id="editLoginOrigin" required>
-                                        <option value="local">local</option>
-                                        <option value="ldap" id="optionLdap">ldap</option>
+                                        <option value="2">Médico</option>
+                                        <option value="3">Paciente</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="division-2">
+                                <div class="user-phone">
+                                    <label for="phone">Telefone</label>
+                                    <input type="text" name="phone" id="phone" required
+                                        pattern="\(\d{2}\)\s?\d{4,5}-\d{4}"
+                                        maxlength="15"
+                                        title="Digite um telefone válido (ex: (11) 91234-5678)">
+                                </div>
                                 <div class="user-login">
                                     <label for="login">Login <span>&ast;</span></label>
-                                    <input type="text" name="login" id="editLogin" required>
+                                    <input type="text" name="login" required>
                                 </div>
-                                <div class="user-password divEditInputPassword">
-                                    <label for="password" >Password</label>
-                                    <input type="password" name="password" id="inputEditPassword">
+                                <div class="user-password divPassword">
+                                    <label for="password" >Password <span>&ast;</span></label>
+                                    <input type="password" id="inputCreatePassword" name="password" required>
                                 </div>
-                                <div class="user-confirm-password divEditInputPassword">
-                                    <label for="confirm-password">Confirm Password</label>
-                                    <input type="password" name="confirm-password" id="inputEditConfirmPassword">
+                                <div class="user-confirm-password divPassword">
+                                    <label for="confirm-password" id="inputConfirmPassword">Confirm Password <span>&ast;</span></label>
+                                    <input type="password" id="inputCreateConfirmPassword" name="confirm-password" required>
                                 </div>
-                                <div id="editActiveDiv">
+                                <div>
                                     <label for="active">Active</label>
-                                    <input type="checkbox" name="active" id="editActive">
+                                    <input type="checkbox" name="active" checked>
                                 </div>
                             </div>
                         </div>
