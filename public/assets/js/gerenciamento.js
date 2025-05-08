@@ -308,3 +308,7 @@ function mascararTelefone(input) {
 
     input.value = value.trim();
 }
+
+function logout() {
+    window.location.href = "../forms/logout.php";
+}

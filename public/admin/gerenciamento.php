@@ -21,6 +21,7 @@ if (isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
         <!-- End message -->
         <h1>Administração de Usuários</h1>
         <div class="cricao-usuario-div">
+            <button onclick="logout()">Logout</button>
             <button onclick="openPopupCreateUser()">Criar Usuário</button>
         </div>
         <table>

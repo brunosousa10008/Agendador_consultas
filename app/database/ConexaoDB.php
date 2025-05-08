@@ -7,7 +7,7 @@ class ConexaoDB {
     private $pdo;
 
     // O construtor agora permite a personalização dos parâmetros de conexão
-    public function __construct($host = '127.0.0.1', $db = 'medprime', $user = 'root', $pass = 'root') {
+    public function __construct($host = 'medprime.mysql.dbaas.com.br', $db = 'medprime', $user = 'medprime', $pass = 'K8CYuVeiT1BRs!') {
         $this->host = $host;
         $this->db = $db;
         $this->user = $user;

@@ -14,6 +14,12 @@
 <body>
     <h1>Login Efetudo com sucesso</h1>
     <p>Pagina em desenvolvimento</p>
+    <button onclick="logout()">Logout</button>
+    <script>
+        function logout() {
+            window.location.href = "./forms/logout.php"; // ou "logout.html"
+        }
+    </script>
 </body>
 </html>
 <?php

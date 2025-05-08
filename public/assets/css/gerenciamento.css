@@ -28,6 +28,8 @@ body {
     
     .cricao-usuario-div {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
         text-align: end;
         
         button {
@@ -41,6 +43,12 @@ body {
             font-size: 15px;
             cursor: pointer;
             border: solid 1px #ffffff;
+
+            &:nth-child(1){
+                margin-left: 3.5rem;
+                background-color: rgb(109, 5, 5);
+                
+            }
         }
     }
 }

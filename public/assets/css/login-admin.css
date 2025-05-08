@@ -3,6 +3,7 @@
 
 body {
     background-color: #D3D3D3;
+    overflow: hidden;
     
     main {
         height: 100dvh;
