@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../app/class/Usuario.php';
 
-if (!isset($_SESSION['authentication']) || empty($_SESSION['authentication'])) {
+if (isset($_SESSION['authentication']) || !empty($_SESSION['authentication'])) {
     echo json_encode(["error" => "Unauthorized"]);
     exit;
 }

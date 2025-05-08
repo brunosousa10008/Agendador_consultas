@@ -175,7 +175,6 @@ function getInfoUserById(id) {
                     document.getElementById("infoLogin").innerText = data.login;
                     document.getElementById("infoTelefone").innerText = data.telefone;
                     document.getElementById("infoAtualizadoEm").innerText = data.atualizado_em;
-                    document.getElementById("infoAtualizadoPor").innerText = data.atualizado_por_name;
                     if (data.ativo == 1) {
                         document.getElementById("infoAtivo").innerText = "Sim";
                         

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../database/ConexaoDB.php";
+ini_set('session.save_path', __DIR__ . '/tmp');
 session_start();
 class Usuario {
     private $pdo;
@@ -39,14 +40,15 @@ class Usuario {
         }
     }
 
-    function criarUsuario(string $nome, int $perfil_id, string $cpf, string $nascimento, string $login, string $telefone, string $senha, int $atualizado_por, bool $ativo) {
+    function criarUsuario(string $nome, int $perfil_id, string $cpf, string $email, string $nascimento, string $login, string $telefone, string $senha, int $atualizado_por, bool $ativo) {
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO tbUsuarios (nome, perfil_id, cpf, nascimento, login, telefone, senha, atualizado_em, atualizado_por, ativo)
-                VALUES (:nome, :perfil_id, :cpf, :nascimento, :login, :telefone, :senha, NOW(), :atualizado_por, :ativo)";
+        $sql = "INSERT INTO tbUsuarios (nome, perfil_id, cpf, email, nascimento, login, telefone, senha, atualizado_em, atualizado_por, ativo)
+                VALUES (:nome, :perfil_id, :cpf, :email, :nascimento, :login, :telefone, :senha, NOW(), :atualizado_por, :ativo)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(":nome", $nome, PDO::PARAM_STR);
         $stmt->bindValue(":perfil_id", $perfil_id, PDO::PARAM_INT);
         $stmt->bindValue(":cpf", $cpf, PDO::PARAM_STR);
+        $stmt->bindValue(":email", $email, PDO::PARAM_STR);
         $stmt->bindValue(":nascimento", $nascimento, PDO::PARAM_STR); // formato 'YYYY-MM-DD'
         $stmt->bindValue(":login", $login, PDO::PARAM_STR);
         $stmt->bindValue(":telefone", $telefone, PDO::PARAM_STR);
@@ -112,9 +114,8 @@ class Usuario {
     }
 
     function lerUsuarioPeloId($id):array {
-        $sql = "SELECT *, u2.nome as atualizado_por_name FROM tbUsuarios as u 
-        LEFT JOIN tbUsuarios as u2 ON u.atualizado_por = u2.usuario_id 
-        WHERE u.usuario_id = :id";
+        $sql = "SELECT * FROM tbUsuarios
+        WHERE usuario_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();

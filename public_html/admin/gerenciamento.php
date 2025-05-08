@@ -239,7 +239,7 @@ if (isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
             </div>
         </div>
 
-        <!-- Pop-up edit user --> 
+        <!-- Pop-up info user --> 
         <div class="popup-info-user" id="popupInfoUser">
             <div class="popup-content-info-user" id="popupContentInfoUser">
                 <div class="title">
@@ -261,7 +261,6 @@ if (isset($_SESSION['autenticacao']) && !empty($_SESSION['autenticacao'])):
                         <li>Email: <span id="infoEmail"></span></li>
                         <li>Telefone: <span id="infoTelefone"></span></li>
                         <li>Atualizado em: <span id="infoAtualizadoEm"></span></li>
-                        <li>Atualizado por: <span id="infoAtualizadoPor"></span></li>
                     </ul>
                 </div>
             </div>

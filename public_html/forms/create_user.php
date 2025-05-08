@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(["error" => "As senhas não coincidem!"]);
         exit;
 
-    } else if ($usuario->criarUsuario($nome, $perfilId, $cpf, $dtnascimento, $login, $telefone, $senha, $atualizadoPor, $ativo)) {
+    } else if ($usuario->criarUsuario($nome, $perfilId, $cpf, $email, $dtnascimento, $login, $telefone, $senha, $atualizadoPor, $ativo)) {
         echo json_encode(["success" => "Usuário criado com sucesso!"]);
         exit;
 
