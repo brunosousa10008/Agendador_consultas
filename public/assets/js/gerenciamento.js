@@ -157,6 +157,80 @@ submitFormEditUser.addEventListener('click', (event) => {
     }
 });
 
+// POP-UP Informação Usuário
+//Função para buscar o id do usuário
+function getInfoUserById(id) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", `../forms/get_user.php?id=${id}`, true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            try {
+                var data = JSON.parse(xhr.responseText);
+                if (data) {
+                    document.getElementById("infoNome").innerText = data.nome;
+                    document.getElementById("infoEmail").innerText = data.email;
+                    document.getElementById("infoCpf").innerText = data.cpf;
+                    document.getElementById("infoDtNascimento").innerText = data.nascimento;
+                    document.getElementById("infoLogin").innerText = data.login;
+                    document.getElementById("infoTelefone").innerText = data.telefone;
+                    document.getElementById("infoAtualizadoEm").innerText = data.atualizado_em;
+                    document.getElementById("infoAtualizadoPor").innerText = data.atualizado_por_name;
+                    if (data.ativo == 1) {
+                        document.getElementById("infoAtivo").innerText = "Sim";
+                        
+                    } else {
+                        document.getElementById("infoAtivo").innerText = "Não";
+                    }
+
+                    switch (data.perfil_id) {
+                        case 1:
+                            document.getElementById("infoPerfil").innerText = "Admin";
+                            break;
+                        case 2:
+                            document.getElementById("infoPerfil").innerText = "Médico";
+                            break;
+                        case 3:
+                            document.getElementById("infoPerfil").innerText = "Paciente";
+                            break;
+                        default:
+                            break;
+                    }  
+                    
+                }
+                
+            } catch (error) {
+                console.error("Erro ao processar JSON:", error);
+            }
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error("Erro na requisição AJAX");
+    };
+
+    xhr.send();
+}
+
+const popupInfoUser = document.getElementById('popupInfoUser');
+const popupContentInfoUser = document.getElementById('popupContentInfoUser');
+function openPopupInfoUser(userId) {
+    getInfoUserById(userId);
+    popupInfoUser.style.display = "flex";
+    setTimeout(() => {
+        popupContentInfoUser.style.marginTop = "2rem";
+    }, 300);
+    
+}
+
+function closePopupInfoUser(e) {
+    e.preventDefault();
+    popupContentInfoUser.style.marginTop = "-80rem";
+    setTimeout(() => {
+        popupInfoUser.style.display = "none";
+    }, 500);
+
+}
 
 //  POP-UP deletar usuário
 const popupDeleteUser = document.getElementById('popupDeleteUser');

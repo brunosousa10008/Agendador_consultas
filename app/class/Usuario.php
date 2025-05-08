@@ -112,7 +112,9 @@ class Usuario {
     }
 
     function lerUsuarioPeloId($id):array {
-        $sql = "SELECT * FROM tbUsuarios WHERE usuario_id = :id";
+        $sql = "SELECT *, u2.nome as atualizado_por_name FROM tbUsuarios as u 
+        LEFT JOIN tbUsuarios as u2 ON u.atualizado_por = u2.usuario_id 
+        WHERE u.usuario_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
