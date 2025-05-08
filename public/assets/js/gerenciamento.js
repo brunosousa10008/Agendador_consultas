@@ -26,33 +26,9 @@ const inputPassword = document.getElementById('inputCreatePassword');
 const inputConfirmPassword = document.getElementById('inputCreateConfirmPassword');
 const divPassword = document.querySelectorAll('.divPassword');
 
-selectOriginAuth.addEventListener('change', () => {
-    if (selectOriginAuth.value == "ldap") {
-        inputPassword.removeAttribute('required');
-        inputConfirmPassword.removeAttribute('required');
-        inputPassword.value = '';
-        inputConfirmPassword.value = '';
-        divPassword.forEach(element => {
-            element.style.display = "none";
-
-        });
-    } else {
-        divPassword.forEach(element => {
-            element.style.display = "flex";
-        });
-        inputPassword.setAttribute('required', 'true');
-        inputConfirmPassword.setAttribute('required', 'true');
-        
-    }    
-
-
-
-})
-
     // Envio de formulário criação de usuário
 const submitFormCreateUser = document.getElementById('submitFormCreateUser');
 const userCreationForm = document.getElementById('userCreationForm');
-
 
 submitFormCreateUser.addEventListener('click', (event) => {
     if (userCreationForm.checkValidity()) {
@@ -93,27 +69,27 @@ function getUserById(id) {
             try {
                 var data = JSON.parse(xhr.responseText);
                 if (data) {
-                    document.getElementById('editId').value = data.id;
-                    document.getElementById("editName").value = data.name;
-                    document.getElementById("editEmail").value = data.email;
-                    document.getElementById("editProfile").value = data.profile_id;
-                    document.getElementById("editLoginOrigin").value = data.login_origin;
-                    document.getElementById("editLogin").value = data.login;
-                    if (data.active == 1) {
-                        document.getElementById("editActive").checked = true;
+                    document.getElementById("edicaoId").value = data.usuario_id;
+                    document.getElementById("edicaoNome").value = data.nome;
+                    document.getElementById("edicaoEmail").value = data.email;
+                    document.getElementById("edicaoCpf").value = data.cpf;
+                    document.getElementById("edicaoDtNascimento").value = data.nascimento;
+                    document.getElementById("edicaoLogin").value = data.login;
+                    document.getElementById("edicaoTelefone").value = data.telefone;
+                    if (data.ativo == 1) {
+                        document.getElementById("edicaoAtivo").checked = true;
                         
                     }
-
-                    document.getElementById('textDeleteUser').innerText = `Are you sure you want to delete user ${data.name}?`;
-                    document.getElementById('deleteUser').value = data.id;
-                
-                    if(data.login_origin === "ldap"){
-                        document.getElementById("inputEditPassword").value = '';
-                        document.getElementById("inputEditConfirmPassword").value = '';
-                        document.querySelectorAll(".divEditInputPassword").forEach(element => {
-                            element.style.display="none";
-                        });            
-                    } 
+          
+                    switch (data.perfil_id) {
+                        case 1:
+                        case 2:
+                        case 3:
+                            document.getElementById("edicaoPerfil").value = data.perfil_id;
+                            break;
+                        default:
+                            break;
+                    }  
                 }
                 
             } catch (error) {
@@ -132,31 +108,6 @@ function getUserById(id) {
 const popupEditUser = document.getElementById('popupEditUser');
 const popupContentEditUser = document.getElementById('popupContentEditUser');
 function openPopupEditUser(userId) {
-    // Se o usuário for administrador ou o id for igual ao id da authentication
-    const DeleteUserBtn = document.getElementById('callPopDeleteUser');
-    const editActiveDiv = document.getElementById("editActiveDiv");
-    const optionLdap = document.getElementById('optionLdap');
-    const optionsProfileAnalyst = document.getElementById('optionsProfileAnalyst');
-
-    if(userId === 1) {
-        optionLdap.style.display = "none";
-        optionsProfileAnalyst.style.display = "none";
-
-    } else {
-        optionLdap.style.display = "block";
-        optionsProfileAnalyst.style.display = "block";
-
-    }
-
-    if(userId === myID || userId === 1) {
-        DeleteUserBtn.style.display = "none";
-        editActiveDiv.style.display = "none";
-
-    } else {
-        DeleteUserBtn.style.display = "flex";
-        editActiveDiv.style.display = "flex";
-    }
-
     getUserById(userId);
     popupEditUser.style.display = "flex";
     setTimeout(() => {
@@ -173,23 +124,6 @@ function closePopupEditUser(e) {
     }, 500);
 
 }
-    // Verificar se a edição de usuário é com ldap
-const editLoginOrigin = document.getElementById('editLoginOrigin');
-
-editLoginOrigin.addEventListener('change', () => {
-    if(editLoginOrigin.value === "ldap"){
-        document.getElementById("inputEditPassword").value = '';
-        document.getElementById("inputEditConfirmPassword").value = '';
-        document.querySelectorAll(".divEditInputPassword").forEach(element => {
-            element.style.display="none";
-        });            
-    } else {
-        document.querySelectorAll(".divEditInputPassword").forEach(element => {
-            element.style.display="flex";
-        }); 
-    }
-})
-
 
     // Envio de formulário edição de usuário
 const submitFormEditUser = document.getElementById('submitFormEditUser');
@@ -228,9 +162,9 @@ submitFormEditUser.addEventListener('click', (event) => {
 const popupDeleteUser = document.getElementById('popupDeleteUser');
 const popupContentDeleteUser = document.getElementById('popupContentDeleteUser');
 
-const callPopDeleteUser = document.getElementById('callPopDeleteUser');
-
-function openPopupDeleteUser(){
+function openPopupDeleteUser($id, $nome){
+    document.getElementById('deletarUsuario').value = $id;
+    document.getElementById('textDeleteUser').innerText = `Tem certeza que deseja apagar o usuário ${$nome}`;
     popupDeleteUser.style.display = "flex";
     setTimeout(() => {
         popupContentDeleteUser.style.marginTop = "2rem";
@@ -245,16 +179,9 @@ function closePopupDeleteUser(e){
     }, 500);
 }
 
-callPopDeleteUser.addEventListener('click', (e) => {
-    e.preventDefault();
-    openPopupDeleteUser();
-
-})
-
     // Envio de formulário exclusão de usuário
 const submitFormDeleteUser = document.getElementById('submitFormDeleteUser');
 const userDeleteForm = document.getElementById('userDeleteForm');
-
 
 submitFormDeleteUser.addEventListener('click', (event) => {
     if (userDeleteForm.checkValidity()) {
@@ -283,3 +210,27 @@ submitFormDeleteUser.addEventListener('click', (event) => {
         xhr.send(formData);
     }
 });
+
+
+function mascararCPF(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value.length > 11) value = value.slice(0, 11);
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d)/, '$1.$2');
+    value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    input.value = value;
+}
+
+function mascararTelefone(input) {
+    let value = input.value.replace(/\D/g, '');
+
+    if (value.length > 11) value = value.slice(0, 11);
+
+    if (value.length <= 10) {
+        value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else {
+        value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+
+    input.value = value.trim();
+}

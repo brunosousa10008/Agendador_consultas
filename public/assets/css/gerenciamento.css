@@ -378,21 +378,7 @@ thead, tbody {
             .user-buttons {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;
-
-                .delete {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.3rem;
-                    background-color: #d61617;
-                    color: white;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    margin-right: 10px;
-                    cursor: pointer;
-
-                }
+                justify-content: end;
 
                 .close {
                     background-color: #d61617;
